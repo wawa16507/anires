@@ -32,8 +32,8 @@
           `/*
 * Inspired by http://strml.net/
 * 源码地址 https://github.com/sitexa/anires
-* 大家好，我是南方。
-* 我来写一份简历！
+* 大家好，我是黄珂。
+* 我来改一个网站！
 */
 
 /* 给所有元素加上过渡效果 */
@@ -93,7 +93,7 @@ html{
   -webkit-transform: rotateY(-10deg) translateZ(-100px) ;
           transform: rotateY(-10deg) translateZ(-100px) ;
 }
-/* 开始写简历 */
+/* 开始吹牛逼 */
 `, `
 /*将Markdown格式翻译成HTML
  *再对HTML加点样式
@@ -126,8 +126,8 @@ html{
   padding: .5em;
   background: #ddd;
 }
-`, `/* 写封感谢信。
- * 感谢大家对我的关注。
+`, `/* 这是一个大神的网站。
+ * 个人简历的网站。
  */
 .styleEditor{
     width:50vw;height:70vh;
@@ -181,22 +181,22 @@ html{
 `],
         currentMarkdown: '',
         currentThankMarkdown: '',
-        fullMarkdown: `南方
+        fullMarkdown: `黄珂
 ====
 
 坐标：湖南长沙。
 
-资深软件工程师，资深产品经理，高级项目经理。现为自由职业。
+资深软件工程师，资深装逼大师
 
 技能
 ====
 
-数据库设计
+LOL
 ----
-  - 结构化数据库设计
-  - noSQL设计
+  - 白金三段位
+  - 想找个有梦想的一起上分
 
-后端开发
+前端开发
 ----
   - 用户管理
   - 单点登录
@@ -243,44 +243,17 @@ html{
   - OS: Ubuntu, CentOS, MacOS, Windows
   - Others: Docker, git, Xmind，Axure
 
-工作经历
+以上我都不会
 ----
 
-1. 湖南融耀健康管理有限公司
-2. 湖南三英特旅游智能技术有限公司
-3. 合肥蓝盾科技有限公司
-4. 上海易保网络有限公司
-5. 厦门海环计算机软件有限公司
 
-教育经历
-----
 
-1. 华东理工大学 环境工程学士
-2. 厦门大学 系统工程硕士
 
-文章
-----
-
-* [故土难离（我的父亲母亲）](https://www.meipian.cn/qacqfbz?uuid=d541c15eef694065bc9d1ac9a07925a2)
-* [油腻腻的中年（小诗）](https://www.meipian.cn/wjaz3zh?uuid=ca1cd053b717451da781786de44e66e7)
-* [生命（老四们的蝼蚁人生）](https://www.meipian.cn/vc4pr59?uuid=799c98f5a187405c94c86f7da7788869)
-* [大健康商业模式](http://www.sitexa.org/technology/%E5%A4%A7%E5%81%A5%E5%BA%B7%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F.html)
-* [社区社交商业模型](http://www.sitexa.org/other/%E7%A4%BE%E5%8C%BA%E7%A4%BE%E4%BA%A4%E5%95%86%E4%B8%9A%E6%A8%A1%E5%9E%8B.html)
-
-链接
-----
-
-* [GitHub](https://github.com/sitexa)
-* [技术博客](http://www.sitexa.org)
-* [南方时代](http://www.sitexa.net)
-* [神秘湘鄂西](http://www.sitexa.cn)
-* [我的简历故事(程序人生公众号文章)](https://mp.weixin.qq.com/s/5rsB956EPVm0FoFOe6xYTg)
 
 勾引方式
 ----
 
-* 微信：xnpeng
-
+* QQ：1650713339
 `, thanksMarkdown: `
 鸣谢
 ----
