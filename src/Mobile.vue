@@ -1,20 +1,27 @@
 <template>
   <div id="app">
-    <StyleEditor ref="styleEditor" :code="currentStyle"></StyleEditor>
-    <ResumeEditor ref="resumeEditor" :markdown="currentMarkdown" :enableHtml="enableHtml"></ResumeEditor>
+    <div id="content">
+      <StyleEditor ref="styleEditor" :code="currentStyle"></StyleEditor>
+      <ResumeEditor ref="resumeEditor" :markdown="currentMarkdown" :enableHtml="enableHtml"></ResumeEditor>
+    </div>
+    <div id="foot">
+      <ThankEditor ref="thankEditor" :markdown="currentThankMarkdown" :enableHtml="enableHtml"></ThankEditor>
+    </div>
   </div>
 </template>
 
 <script>
   import StyleEditor from './components/StyleEditor'
   import ResumeEditor from './components/ResumeEditor'
+  import ThankEditor from './components/ThankEditor'
   import './assets/reset.css'
 
   export default {
     name: 'app',
     components: {
       StyleEditor,
-      ResumeEditor
+      ResumeEditor,
+      ThankEditor
     },
     data() {
       return {
@@ -24,46 +31,42 @@
         fullStyle: [
           `/*
 * Inspired by http://strml.net/
-* 源码地址 https://github.com/sitexa/anires
-* 大家好，我是南方。
-* 我来写一份简历！
+* 源码地址 https://github.com/wawa16507/wawa
+* 大家好，我是黄珂。
+* 我来改一个网页！
 */
 
 /* 给所有元素加上过渡效果 */
 * {
-  transition: all .2s;
+  transition: all .1s;
 }
 /* 设置背景颜色 */
 html {
-  color: rgb(222,222,222);
-  background: rgb(0,43,54);
+  color: rgb(222,222,222); background: rgb(0,64,64);
 }
+#content{
+  height:70vh;
+  margin:0;
+}
+#foot{
+  height:29vh;
+  margin:0;
+}
+
 /* 设置边框 */
 .styleEditor {
   padding: .5em;
   border: 1px solid;
+  margin: .5em;
   overflow: auto;
-  width: 90vw;
-  margin: 2.5vh 5vw;
-  height: 90vh;
-}
-/* 太高了 */
-.styleEditor {
-  height: 45vh;
+  width: 50vw; height: 70vh;
+  background: rgb(20,20,20);
 }
 /* 代码高亮 */
-.token.selector{
-  color: rgb(133,153,0);
-}
-.token.property{
-  color: rgb(187,137,0);
-}
-.token.punctuation{
-  color: yellow;
-}
-.token.function{
-  color: rgb(42,161,152);
-}
+.token.selector{ color: rgb(130,150,0); }
+.token.property{ color: rgb(190,140,0); }
+.token.punctuation{ color: yellow; }
+.token.function{ color: rgb(40,160,150); }
 
 /* 加3D效果 */
 html{
@@ -71,28 +74,30 @@ html{
 }
 .styleEditor {
   position: fixed; left: 0; top: 0;
-  transform: rotateX(-10deg) translateZ(-50px) ;
+  -webkit-transition: none;
+  transition: none;
+  -webkit-transform: rotateY(10deg) translateZ(-100px) ;
+          transform: rotateY(10deg) translateZ(-100px) ;
 }
 
 /* 准备一个编辑器 */
 .resumeEditor{
-  position: fixed;
-  top: 50%; left: 0;
-  padding: .5em;  margin: 2.5vh;
-  width: 95vw; height: 45vh;
+  position: fixed; right: 0; top: 0;
+  padding: .5em;  margin: .5em;
+  width: 50vw; height: 70vh;
   border: 1px solid;
-  background: white; color: #222;
+  background: rgb(200,200,200); color: #222;
   overflow: auto;
+  -webkit-transition: none;
+  transition: none;
+  -webkit-transform: rotateY(-10deg) translateZ(-100px) ;
+          transform: rotateY(-10deg) translateZ(-100px) ;
 }
-/* 开始写简历 */
-
-
-`,
-          `
+/* 开始吹牛逼 */
+`, `
 /*将Markdown格式翻译成HTML
  *再对HTML加点样式
 */
-`, `
 .resumeEditor{
   padding: 2em;
 }
@@ -121,13 +126,67 @@ html{
   padding: .5em;
   background: #ddd;
 }
+`, `/* 这是一个大神的网站。
+ * 希望我们以后都能有一个自己的这样的网站。
+ */
+.styleEditor{
+    width:50vw;height:70vh;
+}
+
+.resumeEditor{
+   width:50vw;height:70vh;
+}
+
+.thankEditor{
+  position: relative; left: 0; top: 0;
+  background: #E9D9BB;
+  color: #001C42;
+  overflow: auto;
+}
+
+.thankEditor {
+  width: 99vw; height: 45vh;
+  border: 1px solid #ccc;
+  font-size: .9em;
+}
+`,`
+.thankEditor{
+  padding: .5em;  margin: .5em; margin-top:1em;
+}
+
+.thankEditor ul,.thankEditor ol{
+  list-style: none;
+}
+.thankEditor ul> li::before{
+  content: '☞'; color: red;
+  margin-right: .5em;
+}
+.thankEditor ol {
+  counter-reset: section;
+}
+.thankEditor ol li::before {
+  counter-increment: section;
+  content: counters(section, "☞") " ";
+  margin-right: .5em;
+}
+
+.thankEditor{
+  width: 99vw; height: 45vh;
+  -webkit-transition: none;
+  transition: none;
+  -webkit-transform: rotateX(-10deg) translateZ(-200px);
+          transform: rotateX(-10deg) translateZ(-200px);
+}
+
 `],
         currentMarkdown: '',
-        fullMarkdown: `南方
+        currentThankMarkdown: '',
+        fullMarkdown: `黄珂
 ====
+
 坐标：湖南长沙。
 
-资深软件工程师，资深产品经理，高级项目经理。现为自由职业。
+资深卵件工程师，资深吹逼大师
 
 技能
 ====
@@ -137,6 +196,7 @@ html{
   - 结构化数据库设计
   - noSQL设计
 
+  
 后端开发
 ----
   - 用户管理
@@ -149,7 +209,7 @@ html{
   - 博客系统
   - 公众号开发
   - 小程序开发
-  - API接口
+  - API接口开发
 
 前端开发
 ----
@@ -184,55 +244,28 @@ html{
   - OS: Ubuntu, CentOS, MacOS, Windows
   - Others: Docker, git, Xmind，Axure
 
-工作经历
-====
-
-1. 湖南融耀健康管理有限公司
-2. 湖南三英特旅游智能技术有限公司
-3. 合肥蓝盾科技有限公司
-4. 上海易保网络有限公司
-5. 厦门海环计算机软件有限公司
-
-教育经历
-====
-
-1. 华东理工大学 环境工程学士
-2. 厦门大学 系统工程硕士
-
-文章
-====
-
-* [故土难离（我的父亲母亲）](https://www.meipian.cn/qacqfbz?uuid=d541c15eef694065bc9d1ac9a07925a2)
-* [油腻腻的中年（小诗）](https://www.meipian.cn/wjaz3zh?uuid=ca1cd053b717451da781786de44e66e7)
-* [生命（老四们的蝼蚁人生）](https://www.meipian.cn/vc4pr59?uuid=799c98f5a187405c94c86f7da7788869)
-* [大健康商业模式](http://www.sitexa.org/technology/%E5%A4%A7%E5%81%A5%E5%BA%B7%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F.html)
-* [社区社交商业模型](http://www.sitexa.org/other/%E7%A4%BE%E5%8C%BA%E7%A4%BE%E4%BA%A4%E5%95%86%E4%B8%9A%E6%A8%A1%E5%9E%8B.html)
-
-链接
-====
-
-* [GitHub](https://github.com/sitexa)
-* [技术博客](http://www.sitexa.org)
-* [南方时代](http://www.sitexa.net)
-* [神秘湘鄂西](http://www.sitexa.cn)
-* [我的简历故事(程序人生公众号文章)](https://mp.weixin.qq.com/s/5rsB956EPVm0FoFOe6xYTg)
+以上我都不会
+----
+但是想学。
 
 勾引方式
-====
+----
+* QQ：1650713339
+<img src ="static/null311cbdae174255c.jpg" style="width:280px;height:350px"></img>
 
-* 微信：xnpeng
-
-鸣谢
+`, thanksMarkdown: `
+最后
 ----
 
-* 这段时间，我有些诚煌诚恐。我的简历被很多人关注(49842），我码的那几篇文章也有很多人点击(20095），微信好友增加了2000多人。"程序人生"公众号文章（我的简历故事）阅读量超过十万+。
-* 有很多企业向我发出了面试邀请，有很多创业团队向我伸出了橄榄枝，一些朋友给我提出非常好的建议，还有很多同学希望跟我进行技术交流，甚至有些企业问我能否承接外包业务。
-* 于是，我受命下山，到了深圳、珠海、北京、天津等地，拜访了一些老板，结识了一些新朋友，见了一些同学和老同事，感触很多，收获很大。IT行业正在发生深刻的变化，新技术、新模式、新思维、新业态，层出不穷，各种探索，各种炒作，让人眼花缭乱。
-* 我对自己也有了一个新的认识。我逐渐发现，我不是去找一份工作，而是在寻找一些机会，一些志同道合的伙伴，一份激动人心的事业。很荣幸，已经有几个朋友跟我达成了意向，准备组建团队。
-* 到底做什么项目呢？我只能简单地说，社交+电商+区块链。肯定有人要说，这个题目太大了，是蹭热度。我不这样想。我以前对社交的思考中，一个重要的因素就是信任关系，而对电商的思考中，去中心化是一个核心考量。而区块链技术不正是解决信任机制和去中心化的利器么？
-* 在此，我欢迎有兴趣的朋友加入我们，尽快推进项目的实施。
+* 大一就要结束了，学校没教多少干货，但是感觉自己学到的还挺多的，每天都过得很充实————打打游戏，吹吹逼，简单而精彩。
+* 我是一个有梦想的有志青年，一直想找一个志同道合的人一起上分，王者大师什么的。有人问我每天起早贪黑这么累干嘛，给自己一点时间放松不行吗，我只想说，这不是游戏，是梦想。
+* 最近想学盗号，改银行卡密码，挺难的。百度老师也不是很会，但我暑假一定学会，到时候想学的可以来问我，只限胸大腿长的女同学，保证教得明明白白。
+* 我还会爬妹子图，爬各种资源。本来想组一个团队把资源打包，上传到百度网盘，然后靠招收代理，卖百度网盘创业发家致富的，但是不知道为什么没人肯加入我。
+* 这一年其实挺快的不是吗。离开了一些人，但也认识了一些人，把那一群人的吹逼技巧教给了这一群人，那边认识了太久的那种腻的感觉升华成了淡淡的思念，这边初识的惊艳与窃喜也远去变成了如今的嫌弃与默契。我们得慢下来。
+* 有什么好玩的都可以来滴滴我交流学习。
 
-`
+
+  `
       }
     },
     created() {
@@ -241,18 +274,17 @@ html{
 
     methods: {
       makeResume: async function () {
-        await this.progressivelyShowStyle(0)
-        await this.progressivelyShowResume()
-        await this.progressivelyShowStyle(1)
-        await this.showHtml()
-        await this.progressivelyShowStyle(2)
+        await this.progressivelyShowStyle(0);
+        await this.progressivelyShowResume();
+        await this.progressivelyShowStyle(1);
+        await this.showHtml();
+        await this.progressivelyShowStyle(2);
+        await this.progressivelyShowThanks();
+        await this.progressivelyShowStyle(3)
       },
-      showHtml: function () {
+      showHtml() {
         return new Promise((resolve, reject) => {
           this.enableHtml = true
-          this.$nextTick(() => {
-            this.$refs.resumeEditor.goTop()
-          })
           resolve()
         })
       },
@@ -261,7 +293,9 @@ html{
           let interval = this.interval
           let showStyle = (async function () {
             let style = this.fullStyle[n]
-            if (!style) { return }
+            if (!style) {
+              return
+            }
             // 计算前 n 个 style 的字符总数
             let length = this.fullStyle.filter((_, index) => index <= n).map((item) => item.length).reduce((p, c) => p + c, 0)
             let prefixLength = length - style.length
@@ -301,6 +335,26 @@ html{
           }
           showResume()
         })
+      },
+      progressivelyShowThanks() {
+        return new Promise((resolve, reject) => {
+          let length = this.thanksMarkdown.length
+          let interval = this.interval
+          let showThanks = () => {
+            if (this.currentThankMarkdown.length < length) {
+              this.currentThankMarkdown = this.thanksMarkdown.substring(0, this.currentThankMarkdown.length + 1)
+              let lastChar = this.currentThankMarkdown[this.currentThankMarkdown.length - 1]
+              let prevChar = this.currentThankMarkdown[this.currentThankMarkdown.length - 2]
+              if (prevChar === '\n' && this.$refs.thankEditor) {
+                this.$nextTick(() => this.$refs.thankEditor.goBottom())
+              }
+              setTimeout(showThanks, interval)
+            } else {
+              resolve()
+            }
+          }
+          showThanks()
+        })
       }
     }
   }
@@ -312,14 +366,13 @@ html{
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-height: 100vh; position: relative;
   }
 
   html {
     min-height: 100vh;
   }
-  *{
+
+  * {
     box-sizing: border-box;
   }
-
 </style>
